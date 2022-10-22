@@ -9,10 +9,26 @@ registerUser($username, $email, $password);
 }
 
 function registerUser($username, $email, $password){
+    // echo $username . $email . $password; exit;
     //save data into the file
-    
-    // echo "OKAY";
+        $file_open = fopen("../storage/users.csv", "a");
+        $no_rows = count(file("users.csv"));
+        if($no_rows > 1)
+        {
+        $no_rows = ($no_rows - 1) + 1;
+        }
+        $form_data = array(
+            'sr_no'  => $no_rows,
+            'fullname'  => $username,
+            'email'  => $email,
+            'password' => $password
+        );
+
+        fputcsv($file_open, $form_data);
+        
+        echo "User Successfully registered";
 }
-echo "HANDLE THIS PAGE";
+// echo "HANDLE THIS PAGE";
+
 
 
